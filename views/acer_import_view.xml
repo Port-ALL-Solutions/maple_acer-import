@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  	<data>
+      
+		<menuitem id="maple_menu_import_acer" 
+			name="Import Acer Report" 
+			parent="maple.maple_available_menu_list"
+            action="action_import_acer"/>
+            
+  	</data>
+</openerp>

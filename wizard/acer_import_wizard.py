@@ -79,7 +79,7 @@ class ImportAcerReport(models.TransientModel):
                     line_vals = {
                             'maple_producer':partner.id, #link to res.partner
                             'weighing_no':row[0], #link to maple_weighing
-                            'weighing':weighing.id,
+                            'weighing_picking_id':weighing.id,
                             'producer_fpaq':row[1], #used to link to res.partner
                             'report_no':row[2],
                             'classif_date':classif_date, #from import - but fixed - row 3

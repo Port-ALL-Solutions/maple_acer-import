@@ -29,6 +29,7 @@ class ImportAcerReport(models.TransientModel):
 #        product_obj = self.env['product.product']
 #        product_uom_obj = self.env['product.uom']
         partner_obj = self.env['res.partner']
+        product_obj = self.env['product.product']
         acer_obj = self.env['maple.import_acer']
         site_obj = self.env['maple.weighing_classif_site']
         weighing_obj = self.env['maple.weighing_picking']
@@ -56,8 +57,11 @@ class ImportAcerReport(models.TransientModel):
                 
                 row_prod_id = row[41]+row[21] #barrel type
                 row_serial = row[19]
-                row_dom = [('location_id','=',self.acer_location_id.id),('container_serial','=ilike',row_serial)]
+                row_dom = [('container_serial','=ilike',row_serial)]
                 row_quant = quant_obj.search(row_dom)
+# DOIT MODIFIER LA RECHERCHE EN CAS DE NUMÉRO DE SÉRIE EN DOUBLE
+#                if row_quant and len(row_quant) == 1:
+                    
                                 
 #                _logger.info(u"line %s - Scellé = %s"% (count,row[18]))
 #                if count == 1:
@@ -139,6 +143,8 @@ class ImportAcerReport(models.TransientModel):
                             'container_type': row[41] #from import
                             }
 
+                    
+
                 # row 3 = serial
 #                     if row[3]:
 #                         lot = product_lot_obj.search([('name','=',row[3])])
@@ -158,12 +164,38 @@ class ImportAcerReport(models.TransientModel):
                         acer.write(line_vals)
                     else:
                         _logger.info(u"line %s - Scellé = %s - append"% (count,row[18]))
-                        lines.append(line_vals)
+                        acer = acer_obj.create(line_vals)
+
+#                    
+                    quant_vals = {
+#                            'site_no':site_no.id, #link to maple.classif_site - from row 9
+#                            'supervised':row[16], #from import
+#                            'inspector':row[17], #from import
+                            'acer_seal_no': row[18], #OUR MAIN KEY
+#                            'net_weight': row[22], #from import
+#                            'weight_adjust':row[24], #from import INDIQUER SI DIFFÉRENT DE LA VALEUR CALCULÉE
+                            'maple_grade': row[25], #from import > CHAR
+                            'maple_brix':row[27], #from import > FLOAT
+                            'maple_light':row[28], #from import > INTEGER
+#                            'maple_flaw': row[29], #from import - ajouter à stock quant
+#                            'maple_flavor':row[30], #from import
+#                            'maple_clarity':row[31], #from import
+#                            'maple_si':row[32], #from import
+#                            'maple_ph': row[33], #from import
+#                            'maple_iodine':row[34], #from import
+#                            'maple_na': row[35], #from import
+#                            'maple_pb':row[36], #from import
+#                            'maple_held':row[37], #from import
+#                            'maple_specialTest':row[38], #from import
+#                            'classif_revision': row[39], #from import
+                            }                    
+                    row_quant.write(quant_vals)
+                    
 #            else:
 #                missing_product.append(row[0])
 #        if not missing_product and lines:
-            for line_vals in lines:
-                acer = acer_obj.create(line_vals)
+#            for line_vals in lines:
+#                acer = acer_obj.create(line_vals)
 #        else:
 #            missing_product_name = ',\n'.join(missing_product)
 #                raise ValidationError(_('Below products are missing in system \n %s.'%missing_product_name))

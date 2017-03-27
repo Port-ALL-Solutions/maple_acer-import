@@ -10,6 +10,7 @@
                         <group>
                             <field name="import_file" class="oe_inline" filename="datas_fname" required="True"/>
                             <field name="datas_fname" class="oe_inline" invisible="0" readonly="0"/>
+                            <field name="acer_location_id" class="oe_inline"/>
                         </group>
                         <footer>
                             <button string="Import" name="action_acer_import_file" type="object" class="oe_highlight"/>

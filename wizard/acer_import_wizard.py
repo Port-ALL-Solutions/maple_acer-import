@@ -13,6 +13,13 @@ class ImportAcerReport(models.TransientModel):
 
     import_file = fields.Binary(string="Import CSV File", redonly=True)
     datas_fname = fields.Char('Import File Name')
+    acer_location_id = fields.Many2one(
+        'stock.location', 'Destination Location',
+#        index=True,
+        required=True,
+        domain="[('name','ilike','class'),('maxItem','>',0)]", #Classement 1, Classement 2, Classement NB
+        help="Select the classification location involved."
+        )
     
     @api.multi
     def action_acer_import_file(self):
@@ -26,6 +33,7 @@ class ImportAcerReport(models.TransientModel):
         site_obj = self.env['maple.weighing_classif_site']
         weighing_obj = self.env['maple.weighing_picking']
         employee_obj = self.env['hr.employee']
+        quant_obj = self.env['stock.quant']
 #        stock_inv_line_obj = self.env['stock.inventory.line']
 #       ctx = self.env.context
 #         if self.location_id:
@@ -44,6 +52,13 @@ class ImportAcerReport(models.TransientModel):
             lines = []
             missing_partner = []
             for row in reader:
+                
+                
+                row_prod_id = row[41]+row[21] #barrel type
+                row_serial = row[19]
+                row_dom = [('location_id','=',self.acer_location_id.id),('container_serial','=ilike',row_serial)]
+                row_quant = quant_obj.search(row_dom)
+                                
 #                _logger.info(u"line %s - Scellé = %s"% (count,row[18]))
 #                if count == 1:
 #                    count += 1

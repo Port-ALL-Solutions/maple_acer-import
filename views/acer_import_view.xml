@@ -4,7 +4,8 @@
       
 		<menuitem id="maple_menu_import_acer" 
 			name="Import Acer Report" 
-			parent=""
+			parent="maple.maple_preparation_menu"
+			sequence="43"
             action="action_import_acer"/>
             
   	</data>

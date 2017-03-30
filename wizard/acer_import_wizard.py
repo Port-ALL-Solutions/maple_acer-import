@@ -73,6 +73,18 @@ class ImportAcerReport(models.TransientModel):
 #                product = product_obj.search([('default_code','=',row[0])])
 #                if product:
                 partner = partner_obj.search([('fpaqCode','=',row[1])])
+                if len(partner) == 1:
+                    while partner.parent_id:
+                        partner = partner.parent_id
+                else:
+                    parent = []
+                    for p in partner:
+                        while p.parent_id:
+                            p = p.parent_id
+                        if p not in parent:
+                            parent.append(p)
+                    if len(parent) == 1:
+                        partner = parent[0]
 #                site_no = site_obj.search([('site_no','=',row[9])])
                 acer = acer_obj.search([('seal_no','=',row[18])])
                 inspectNb = row[18][3:4]

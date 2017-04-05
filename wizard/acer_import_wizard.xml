@@ -3,7 +3,7 @@
     <data>
 
         <record model="ir.ui.view" id="import_acer_form_view">
-            <field name="name">Import Acer Report Using CSV</field>
+            <field name="name">Import Acer CSV Report</field>
             <field name="model">import.acer</field>
                 <field name="arch" type="xml">
                     <form string="Import Acer Report Using CSV">
@@ -22,7 +22,7 @@
         </record>
 
         <record id="action_import_acer" model="ir.actions.act_window">
-            <field name="name">Import Acer Report Using CSV</field>
+            <field name="name">Import Acer CSV Report</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">import.acer</field>
             <field name="view_type">form</field>

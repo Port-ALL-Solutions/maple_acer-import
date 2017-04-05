@@ -35,6 +35,8 @@ class ImportAcerReport(models.TransientModel):
         weighing_obj = self.env['maple.weighing_picking']
         employee_obj = self.env['hr.employee']
         quant_obj = self.env['stock.quant']
+        flavor_obj = self.env['maple.flavors']
+        flaw_obj = self.env['maple.flaws']
 #        stock_inv_line_obj = self.env['stock.inventory.line']
 #       ctx = self.env.context
 #         if self.location_id:
@@ -59,6 +61,9 @@ class ImportAcerReport(models.TransientModel):
                 row_serial = row[19]
                 row_dom = [('container_serial','=ilike',row_serial)]
                 row_quant = quant_obj.search(row_dom)
+                row_flavor = flavor_obj.search([('name','=',row[30])])
+                row_flaw = flaw_obj.search([('name','=',str(row[29]))])
+                
 # DOIT MODIFIER LA RECHERCHE EN CAS DE NUMÉRO DE SÉRIE EN DOUBLE
 #                if row_quant and len(row_quant) == 1:
                     
@@ -140,8 +145,8 @@ class ImportAcerReport(models.TransientModel):
                             'maple_type':row[26], #from import
                             'maple_brix':row[27], #from import
                             'maple_light':row[28], #from import
-                            'maple_flaw': row[29], #from import
-                            'maple_flavor':row[30], #from import
+                            'maple_flaw': row_flaw.id, #from import
+                            'maple_flavor': row_flavor.id, #from import
                             'maple_clarity':row[31], #from import
                             'maple_si':row[32], #from import
                             'maple_ph': row[33], #from import
@@ -154,8 +159,6 @@ class ImportAcerReport(models.TransientModel):
                             'weighing_order':row[40], #from import
                             'container_type': row[41] #from import
                             }
-
-                    
 
                 # row 3 = serial
 #                     if row[3]:
@@ -189,8 +192,8 @@ class ImportAcerReport(models.TransientModel):
                             'maple_grade': row[25], #from import > CHAR
                             'maple_brix':row[27], #from import > FLOAT
                             'maple_light':row[28], #from import > INTEGER
-#                            'maple_flaw': row[29], #from import - ajouter à stock quant
-#                            'maple_flavor':row[30], #from import
+                            'maple_flaw': row_flaw.id, #from import - ajouter à stock quant
+                            'maple_flavor': row_flavor.id, #from import
 #                            'maple_clarity':row[31], #from import
 #                            'maple_si':row[32], #from import
 #                            'maple_ph': row[33], #from import
@@ -200,9 +203,9 @@ class ImportAcerReport(models.TransientModel):
 #                            'maple_held':row[37], #from import
 #                            'maple_specialTest':row[38], #from import
 #                            'classif_revision': row[39], #from import
-                            }                    
+                            }
                     row_quant.write(quant_vals)
-                    
+
 #            else:
 #                missing_product.append(row[0])
 #        if not missing_product and lines:

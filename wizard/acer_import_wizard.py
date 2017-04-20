@@ -61,8 +61,8 @@ class ImportAcerReport(models.TransientModel):
                 row_serial = row[19]
                 row_dom = [('container_serial','=ilike',row_serial)]
                 row_quant = quant_obj.search(row_dom)
-                row_flavor = flavor_obj.search([('name','=',row[30])])
-                row_flaw = flaw_obj.search([('name','=',str(row[29]))])
+                row_flavor = flavor_obj.search([('name','=',str(row[29]))])
+                row_flaw = flaw_obj.search([('name','=',row[30])])
                 
 # DOIT MODIFIER LA RECHERCHE EN CAS DE NUMÉRO DE SÉRIE EN DOUBLE
 #                if row_quant and len(row_quant) == 1:
@@ -92,12 +92,13 @@ class ImportAcerReport(models.TransientModel):
                         partner = parent[0]
 #                site_no = site_obj.search([('site_no','=',row[9])])
                 acer = acer_obj.search([('seal_no','=',row[18])])
-                inspectNb = row[18][3:4]
+                inspectNb = row[18][2:3]
                 employee = employee_obj.search([('inspectNb','=',inspectNb)])
                 if not employee:
                     employee_vals = {
                             'name':row[17],
-                            'inspectNb':inspectNb
+                            'inspectNb':inspectNb,
+                            'barrelCnt':str(int(row[18][5:9]) - 1)
                             }
                     employee = employee_obj.create(employee_vals)
                 weighing = weighing_obj.search([('name','=',row[0])])
@@ -185,8 +186,8 @@ class ImportAcerReport(models.TransientModel):
                     quant_vals = {
 #                            'site_no':site_no.id, #link to maple.classif_site - from row 9
 #                            'supervised':row[16], #from import
-#                            'inspector':row[17], #from import
-                            'acer_seal_no': row[18], #OUR MAIN KEY
+                            'controler':employee.id,
+                            'maple_seal_no': row[18], #OUR MAIN KEY
 #                            'net_weight': row[22], #from import
 #                            'weight_adjust':row[24], #from import INDIQUER SI DIFFÉRENT DE LA VALEUR CALCULÉE
                             'maple_grade': row[25], #from import > CHAR

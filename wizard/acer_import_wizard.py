@@ -154,8 +154,8 @@ class ImportAcerReport(models.TransientModel):
                             'maple_iodine':row[34], #from import
                             'maple_na': row[35], #from import
                             'maple_pb':row[36], #from import
-                            'maple_held':row[37], #from import
-                            'maple_specialTest':row[38], #from import
+                            'maple_retained':row[37], #from import
+                            'maple_special_test':row[38], #from import
                             'classif_revision': row[39], #from import
                             'weighing_order':row[40], #from import
                             'container_type': row[41] #from import
@@ -184,8 +184,10 @@ class ImportAcerReport(models.TransientModel):
 
 #                    
                     quant_vals = {
+                            'acer_report_no': row[2],
+                            'class_date': classif_date,
 #                            'site_no':site_no.id, #link to maple.classif_site - from row 9
-#                            'supervised':row[16], #from import
+                            'supervised':row[16], #from import
                             'controler':employee.id,
                             'maple_seal_no': row[18], #OUR MAIN KEY
 #                            'net_weight': row[22], #from import
@@ -195,15 +197,15 @@ class ImportAcerReport(models.TransientModel):
                             'maple_light':row[28], #from import > INTEGER
                             'maple_flaw': row_flaw.id, #from import - ajouter à stock quant
                             'maple_flavor': row_flavor.id, #from import
-#                            'maple_clarity':row[31], #from import
-#                            'maple_si':row[32], #from import
-#                            'maple_ph': row[33], #from import
-#                            'maple_iodine':row[34], #from import
-#                            'maple_na': row[35], #from import
-#                            'maple_pb':row[36], #from import
-#                            'maple_held':row[37], #from import
-#                            'maple_specialTest':row[38], #from import
-#                            'classif_revision': row[39], #from import
+                            'maple_clarity':row[31], #from import
+                            'maple_si':row[32], #from import
+                            'maple_ph': row[33], #from import
+                            'maple_iodine':row[34], #from import
+                            'maple_na': row[35], #from import
+                            'maple_pb':row[36], #from import
+                            'maple_retained':row[37], #from import
+                            'maple_special_test':row[38], #from import
+                            'classif_revision': row[39], #from import
                             }
                     row_quant.write(quant_vals)
 

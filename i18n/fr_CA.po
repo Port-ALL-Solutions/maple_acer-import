@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-03 08:32-0400\n"
-"PO-Revision-Date: 2017-04-03 08:38-0400\n"
+"POT-Creation-Date: 2017-04-27 08:04-0400\n"
+"PO-Revision-Date: 2017-04-27 08:15-0400\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -53,25 +53,29 @@ msgid "Import"
 msgstr "Importer"
 
 #. module: acer_import
+#: model:ir.actions.act_window,name:acer_import.action_import_acer
+msgid "Import Acer CSV Report"
+msgstr "Importer le rapport CSV d'Acer"
+
+#. module: acer_import
 #: model:ir.ui.menu,name:acer_import.maple_menu_import_acer
 msgid "Import Acer Report"
 msgstr "Rapport d'importation Acer"
 
 #. module: acer_import
-#: model:ir.actions.act_window,name:acer_import.action_import_acer
 #: model:ir.ui.view,arch_db:acer_import.import_acer_form_view
 msgid "Import Acer Report Using CSV"
-msgstr "Rapport d'importation Acer avec CSV"
+msgstr "Importer le rapport d'Acer en format CSV"
 
 #. module: acer_import
 #: model:ir.model.fields,field_description:acer_import.field_import_acer_import_file
 msgid "Import CSV File"
-msgstr "Importer fichier CSV"
+msgstr "Fichier CSV importé"
 
 #. module: acer_import
 #: model:ir.model.fields,field_description:acer_import.field_import_acer_datas_fname
 msgid "Import File Name"
-msgstr "Nom fichier import"
+msgstr "Nom du fichier importé"
 
 #. module: acer_import
 #: model:ir.model.fields,field_description:acer_import.field_import_acer___last_update
@@ -94,7 +98,7 @@ msgid "Select the classification location involved."
 msgstr "Sélectionner l'emplacement de classification impliqué."
 
 #. module: acer_import
-#: code:addons/acer_import/wizard/acer_import_wizard.py:215
+#: code:addons/acer_import/wizard/acer_import_wizard.py:221
 #, python-format
 msgid "Wrong file format. Please enter .csv file."
 msgstr "Format de fichier erroné. Entrez svp un fichier .csv."

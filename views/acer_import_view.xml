@@ -5,7 +5,7 @@
 		<menuitem id="maple_menu_import_acer" 
 			name="Import Acer Report" 
 			parent="maple.maple_classif_menu"
-			sequence="45"
+			sequence="64"
             action="action_import_acer"/>
             
   	</data>

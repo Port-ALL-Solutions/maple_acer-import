@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-27 08:04-0400\n"
-"PO-Revision-Date: 2017-04-27 08:15-0400\n"
+"PO-Revision-Date: 2017-04-27 19:45-0400\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -60,7 +60,7 @@ msgstr "Importer le rapport CSV d'Acer"
 #. module: acer_import
 #: model:ir.ui.menu,name:acer_import.maple_menu_import_acer
 msgid "Import Acer Report"
-msgstr "Rapport d'importation Acer"
+msgstr "Importer un rapport Acer"
 
 #. module: acer_import
 #: model:ir.ui.view,arch_db:acer_import.import_acer_form_view
@@ -95,7 +95,7 @@ msgstr "Dernière mise à jour le"
 #. module: acer_import
 #: model:ir.model.fields,help:acer_import.field_import_acer_acer_location_id
 msgid "Select the classification location involved."
-msgstr "Sélectionner l'emplacement de classification impliqué."
+msgstr "Sélectionner l'emplacement de classement impliqué."
 
 #. module: acer_import
 #: code:addons/acer_import/wizard/acer_import_wizard.py:221
